@@ -5,7 +5,6 @@ require 'eventmachine'
 require 'erb'
 require 'ghpreview/converter'
 require 'httpclient'
-require 'ghpreview'
 
 module GHPreview
   module InstantMarkdownD
