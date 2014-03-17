@@ -2,4 +2,4 @@
 
 require 'ghpreview/instant_markdown_d'
 
-GHPreview::InstantMarkdownD::Server.run
+GHPreview::InstantMarkdownD::Previewer.new

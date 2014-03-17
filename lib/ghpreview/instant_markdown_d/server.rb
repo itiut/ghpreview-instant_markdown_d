@@ -2,27 +2,15 @@ require 'rack/request'
 require 'rack/response'
 require 'faye/websocket'
 require 'eventmachine'
-require 'erb'
 require 'ghpreview/converter'
-require 'httpclient'
 
 module GHPreview
   module InstantMarkdownD
     class Server
-      GITHUB_URL = 'https://github.com'
 
-      class << self
-        def run
-          Faye::WebSocket.load_adapter('thin')
-          Rack::Handler::Thin.run Server.new, :Host => '127.0.0.1', :Port => 8090
-        end
-      end
-
-      def initialize
-        http = HTTPClient.new
-        @stylesheet_links = http.get(GITHUB_URL).body.split("\n").select { |line|
-          line =~ /https:.*github.*\.css/
-        }.join
+      def self.run(host, port)
+        Faye::WebSocket.load_adapter('thin')
+        Rack::Handler::Thin.run Server.new, :Host => host, :Port => port
       end
 
       def call(env)
@@ -42,15 +30,12 @@ module GHPreview
 
           case req.request_method
           when 'GET'
-            template_path = "#{File.dirname(__FILE__)}/template.erb"
-            raw_template  = File.read(template_path)
-            styled_template = ERB.new(raw_template).result(binding)
-            Rack::Response.new(styled_template).finish
+            Rack::Response.new(Wrapper.wrap_html nil).finish
 
           when 'PUT'
             EM.defer do
               md = req.body.read
-              html = GHPreview::Converter.to_html md
+              html = Converter.to_html md
               @es.send(html, event: 'preview') if @es
             end
 
@@ -67,8 +52,8 @@ module GHPreview
           end
 
         end
-
       end
+
     end
   end
 end
