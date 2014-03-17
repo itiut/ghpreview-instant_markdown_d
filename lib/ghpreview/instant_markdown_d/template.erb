@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <%= @stylesheet_links %>
+    <style>
+      body { padding: 30px 0; }
+      #readme { width: 914px; margin: 0 auto; }
+    </style>
+    <script>
+      var socket = new EventSource('/');
+
+      socket.onopen = function() {
+        console.log('OPEN');
+      };
+
+      socket.onmessage = function(event) {
+        console.log('MESSAGE: ' + event.data);
+      };
+
+      socket.onerror = function(event) {
+        console.log('ERROR: ' + event.message);
+      };
+
+      socket.addEventListener('preview', function(event) {
+        document.getElementsByClassName('markdown-body')[0].innerHTML = event.data;
+      });
+
+      socket.addEventListener('die', function(event) {
+        socket.close();
+        console.log('DIE');
+      });
+    </script>
+  </head>
+  <body>
+    <div id="readme">
+      <article class="markdown-body">
+      </article>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require 'ghpreview/instant_markdown_d'
+
+GHPreview::InstantMarkdownD::Server.run
