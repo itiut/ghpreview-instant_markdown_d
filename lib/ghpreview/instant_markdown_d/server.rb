@@ -11,7 +11,7 @@ module GHPreview
 
       def self.run(host, port)
         Sender.setup
-        Rack::Handler::Thin.run self.new, Host: host, Port: port
+        Rack::Handler::Thin.run new, Host: host, Port: port
       end
 
       def call(env)
