@@ -4,12 +4,14 @@ require 'faye/websocket'
 require 'eventmachine'
 require 'ghpreview/converter'
 
+require_relative 'sender'
+
 module GHPreview
   module InstantMarkdownD
     class Server
 
       def self.run(host, port)
-        Faye::WebSocket.load_adapter('thin')
+        Sender.setup
         Rack::Handler::Thin.run self.new, :Host => host, :Port => port
       end
 
