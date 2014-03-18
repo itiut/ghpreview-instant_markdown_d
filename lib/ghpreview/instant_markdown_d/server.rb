@@ -10,7 +10,7 @@ module GHPreview
 
       def self.run(host, port)
         Faye::WebSocket.load_adapter('thin')
-        Rack::Handler::Thin.run Server.new, :Host => host, :Port => port
+        Rack::Handler::Thin.run self.new, :Host => host, :Port => port
       end
 
       def call(env)
