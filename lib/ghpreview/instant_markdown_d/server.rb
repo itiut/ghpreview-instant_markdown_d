@@ -39,7 +39,7 @@ module GHPreview
           when 'DELETE'
             EM.add_timer(1) do
               Sender.send 'die', :die
-              Kernel.exit!
+              Process.kill('TERM', Process.pid)
             end
 
             [200, {}, []]
