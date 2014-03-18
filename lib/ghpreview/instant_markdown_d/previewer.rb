@@ -19,7 +19,6 @@ module GHPreview
 
         Server.run HOST, PORT
       end
-
     end
   end
 end
