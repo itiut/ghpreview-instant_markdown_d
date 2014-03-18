@@ -7,7 +7,7 @@ require_relative 'wrapper'
 module GHPreview
   module InstantMarkdownD
     class Previewer
-      HOST = '127.0.0.1'
+      HOST = 'localhost'
       PORT = 8090
 
       def initialize
