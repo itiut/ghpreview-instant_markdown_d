@@ -14,9 +14,7 @@ module GHPreview
 
       def self.response(env)
         @es ||= Faye::EventSource.new(env)
-        @es.onclose = lambda do |event|
-          @es = nil
-        end
+        @es.onclose = lambda { |event| @es = nil }
         @es.rack_response
       end
 
