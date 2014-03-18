@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = GHPreview::InstantMarkdownD::VERSION
   spec.authors       = ["Yuichi TANIKAWA"]
   spec.email         = ["t.yuichi111@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{Small server running ghpreview compatible with instant-markdown-d}
+  spec.description   = spec.summary
   spec.homepage      = ""
   spec.license       = "MIT"
 
