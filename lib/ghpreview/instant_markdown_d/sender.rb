@@ -8,6 +8,21 @@ module GHPreview
         Faye::WebSocket.load_adapter('thin')
       end
 
+      def self.request?(env)
+        Faye::EventSource.eventsource?(env)
+      end
+
+      def self.response(env)
+        @es ||= Faye::EventSource.new(env)
+        @es.onclose = lambda do |event|
+          @es = nil
+        end
+        @es.rack_response
+      end
+
+      def self.send(content, event)
+        @es.send(content, event: event.to_s) if @es
+      end
     end
   end
 end

@@ -1,6 +1,5 @@
 require 'rack/request'
 require 'rack/response'
-require 'faye/websocket'
 require 'eventmachine'
 require 'ghpreview/converter'
 
@@ -16,16 +15,10 @@ module GHPreview
       end
 
       def call(env)
-        if Faye::EventSource.eventsource?(env)
-          @es ||= Faye::EventSource.new(env)
-
+        if Sender.request? env
           puts 'connetion establish!'
 
-          @es.onclose = lambda do |event|
-            @es = nil
-          end
-
-          @es.rack_response
+          Sender.response env
 
         else
           req = Rack::Request.new(env)
@@ -38,14 +31,14 @@ module GHPreview
             EM.defer do
               md = req.body.read
               html = Converter.to_html md
-              @es.send(html, event: 'preview') if @es
+              Sender.send html, :preview
             end
 
             [200, {}, []]
 
           when 'DELETE'
             EM.add_timer(1) do
-              @es.send('die', event: 'die') if @es
+              Sender.send 'die', :die
               Kernel.exit!
             end
 
