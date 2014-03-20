@@ -1,4 +1,4 @@
-# Ghpreview::InstantMarkdownD
+# GHPreview::InstantMarkdownD
 
 TODO: Write a gem description
 
