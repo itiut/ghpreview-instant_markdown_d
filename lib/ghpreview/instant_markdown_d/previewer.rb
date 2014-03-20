@@ -2,7 +2,7 @@ require 'eventmachine'
 
 require_relative 'server'
 require_relative 'viewer'
-require_relative 'wrapper'
+require_relative 'extension/ghpreview/wrapper'
 
 module GHPreview
   module InstantMarkdownD
