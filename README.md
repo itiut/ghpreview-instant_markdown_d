@@ -1,28 +1,41 @@
 # GHPreview::InstantMarkdownD
 
-TODO: Write a gem description
+GHPreview::InstantMarkdownD is a small server that is compatible with [instant-markdown-d](https://github.com/suan/instant-markdown-d).
+It uses `ghpreview` for previewing Markdown files.
+
+See also
+* [ghpreview](https://github.com/neo/ghpreview )
+* [instant-markdown-d](https://github.com/suan/instant-markdown-d )
+
+## Prerequisites
+
+You'll need the icu library.
+
+If you're on a Mac
+
+```bash
+$ brew install icu4c
+```
+
+or on Ubuntu
+
+```bash
+$ sudo apt-get install libicu-dev
+```
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-    gem 'ghpreview-instant_markdown_d'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install ghpreview-instant_markdown_d
+```bash
+$ gem install ghpreview-instant_markdown_d
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+See [instant-markdown-d](https://github.com/suan/instant-markdown-d ).
 
 ## Contributing
 
-1. Fork it ( http://github.com/<my-github-username>/ghpreview-instant_markdown_d/fork )
+1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
